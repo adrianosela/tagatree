@@ -1,0 +1,20 @@
+version: '3'
+services:
+  mongo.adrianosela.com:
+    image: mongo
+    ports:
+      - 27017:27017
+    environment:
+      - MONGO_INITDB_DATABASE=mock-db
+    volumes:
+      - ./.mongo-seed.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+  tagatree.adrianosela.com:
+    image: tagatree
+    build: .
+    ports:
+      - 8080:80
+    environment:
+      - MONGO_CONN_STR=mongodb://mock-user:mock-pwd@mongo.adrianosela.com:27017/mock-db
+      - MONGO_DB_NAME=mock-db
+    depends_on:
+      - mongo.adrianosela.com
