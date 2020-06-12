@@ -23,7 +23,7 @@ func (c *Controller) listTreesHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Println(err)
 		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte("an unknown error occured retrieving trees"))
+		w.Write([]byte("an unknown error occurred retrieving trees"))
 		return
 	}
 
