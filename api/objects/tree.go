@@ -17,6 +17,7 @@ type Tree struct {
 	ID       primitive.ObjectID `json:"id,omitempty" bson:"_id,omitempty"`
 	TaggedBy string             `json:"tagged_by" bson:"tagged_by"`
 	Species  string             `json:"species" bson:"species"`
+	Location Location           `json:"location" bson:"location"`
 }
 
 // Validate validates a tree has all
@@ -31,5 +32,5 @@ func (t *Tree) Validate(checkID, checkTaggedBy bool) error {
 	if t.Species == "" {
 		return errTreeHasNoSpecies
 	}
-	return nil
+	return t.Location.Validate()
 }

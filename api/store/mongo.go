@@ -3,6 +3,8 @@ package store
 import (
 	"context"
 	"errors"
+	"log"
+	"time"
 
 	"github.com/adrianosela/tagatree/api/objects"
 
@@ -10,6 +12,15 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
+	"go.mongodb.org/mongo-driver/x/bsonx"
+)
+
+var (
+	// index on the 2dsphere type field "location"
+	treeIndexModel = mongo.IndexModel{
+		Options: options.Index().SetBackground(true),
+		Keys:    bsonx.MDoc{"location": bsonx.String("2dsphere")},
+	}
 )
 
 // Mongo implements the DB
@@ -23,18 +34,30 @@ type Mongo struct {
 // the format of the mongo connection string is:
 // mongodb://<user>:<pass>@<url>:<port>/<dbname>
 func NewMongo(connStr, db string) (*Mongo, error) {
-	client, err := mongo.Connect(context.TODO(), options.Client().ApplyURI(connStr))
+	// mongo setup timeout
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+
+	client, err := mongo.Connect(ctx, options.Client().ApplyURI(connStr))
 	if err != nil {
 		return nil, err
 	}
 
-	// liveliness check
-	if err = client.Ping(context.TODO(), nil); err != nil {
+	if err = client.Ping(ctx, nil); err != nil {
+		return nil, err
+	}
+
+	log.Println("connected to mongodb")
+
+	trees := client.Database(db).Collection(treesCollectionName)
+	ciopts := options.CreateIndexes().SetMaxTime(time.Second * 10)
+
+	if _, err := trees.Indexes().CreateOne(ctx, treeIndexModel, ciopts); err != nil {
 		return nil, err
 	}
 
 	return &Mongo{
-		trees: client.Database(db).Collection(treesCollectionName),
+		trees: trees,
 	}, nil
 }
 
