@@ -1,4 +1,4 @@
-# tagatree
+# Tag-A-Tree
 
 [![Go Report Card](https://goreportcard.com/badge/github.com/adrianosela/tagatree)](https://goreportcard.com/report/github.com/adrianosela/tagatree/api)
 [![Documentation](https://godoc.org/github.com/adrianosela/tagatree/api?status.svg)](https://godoc.org/github.com/adrianosela/tagatree/api)
