@@ -2,10 +2,11 @@ import React from 'react';
 import { StyleSheet, Text, View, StatusBar, Image, Animated, ActivityIndicator } from 'react-native';
 import jwtDecode from 'jwt-decode';
 import AsyncStorageManager from '../../../utils/AsyncStorageManager';
+import Logo from '../common/Logo';
 
 const styles = StyleSheet.create({
     topContainer: {
-        backgroundColor: '#888888',
+        backgroundColor: '#88ffff',
         height: '100%',
         width: '100%',
         flexDirection: 'column',
@@ -117,11 +118,7 @@ export default class Splash extends React.Component {
             <View style={[styles.topContainer, styles.container]}>
                 <StatusBar barStyle="light-content" />
                 <Animated.View style={[styles.logoWrapper, {width: this.state.logoWidth}]}>
-                    <Image
-                        source={require('../../../assets/icon.png')}
-                        style={styles.cube}
-                        resizeMode="contain"
-                    />
+		  <Logo />
                 </Animated.View>
                 <ActivityIndicator size="small"
                     color={'#000000'}
