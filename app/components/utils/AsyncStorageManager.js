@@ -1,7 +1,7 @@
 import React from 'react';
 import { AsyncStorage } from 'react-native';
 
-export default class Storage {
+export default class AsyncStorageManager {
     static instance = null;
 
     static getInstance() {

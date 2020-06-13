@@ -1,9 +1,15 @@
 import React from 'react';
 import { StyleSheet, Text, View, StatusBar, Image, Animated, ActivityIndicator } from 'react-native';
 import jwtDecode from 'jwt-decode';
-import Storage from '../utils/Storage';
+import AsyncStorageManager from '../utils/AsyncStorageManager';
 
 const styles = StyleSheet.create({
+    topContainer: {
+        backgroundColor: '#888888',
+        height: '100%',
+        width: '100%',
+        flexDirection: 'column',
+    },
     container: {
         justifyContent: 'center',
         alignItems: 'center',
@@ -16,8 +22,8 @@ const styles = StyleSheet.create({
         width: 80,
     },
     cube: {
-        height: 80,
-        width:  80,
+        height: 100,
+        width:  100,
     },
     letters: {
         height: 80,
@@ -108,7 +114,7 @@ export default class Splash extends React.Component {
 
     render() {
         return (
-            <View style={[CommonStyles.container, styles.container]}>
+            <View style={[styles.topContainer, styles.container]}>
                 <StatusBar barStyle="light-content" />
                 <Animated.View style={[styles.logoWrapper, {width: this.state.logoWidth}]}>
                     <Image
@@ -118,7 +124,7 @@ export default class Splash extends React.Component {
                     />
                 </Animated.View>
                 <ActivityIndicator size="small"
-                    color={Colors.themeBlue}
+                    color={'#000000'}
                     style={[styles.loading, {opacity: this.state.showLoading ? 1.0 : 0.0}]}
                 />
             </View>
