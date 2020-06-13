@@ -92,7 +92,7 @@ func (c *Controller) tagTreeHandler(w http.ResponseWriter, r *http.Request) {
 
 	tree.TaggedBy = claims.Subject // include tree tagger username
 
-	if err := tree.Validate(false, true); err != nil {
+	if err := tree.Validate(false); err != nil {
 		log.Println(err)
 		w.WriteHeader(http.StatusBadRequest)
 		w.Write([]byte(err.Error())) // propagate err

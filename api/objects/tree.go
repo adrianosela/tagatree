@@ -22,11 +22,11 @@ type Tree struct {
 
 // Validate validates a tree has all
 // mandatory fields populated
-func (t *Tree) Validate(checkID, checkTaggedBy bool) error {
+func (t *Tree) Validate(checkID bool) error {
 	if checkID && t.ID.String() == "" {
 		return errTreeHasNoID
 	}
-	if checkTaggedBy && t.TaggedBy == "" {
+	if t.TaggedBy == "" {
 		return errTreeHasNoTaggedBy
 	}
 	if t.Species == "" {
