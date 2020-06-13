@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"time"
 
 	"github.com/adrianosela/tagatree/api/auth"
 	"github.com/adrianosela/tagatree/api/objects"
@@ -90,7 +91,11 @@ func (c *Controller) tagTreeHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	tree.TaggedBy = claims.Subject // include tree tagger username
+	// include tree tagger username
+	tree.TaggedBy = claims.Subject
+	if tree.TaggedAt == nil {
+		*tree.TaggedAt = time.Now()
+	}
 
 	if err := tree.Validate(false); err != nil {
 		log.Println(err)
