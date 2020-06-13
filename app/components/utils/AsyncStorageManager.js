@@ -26,7 +26,6 @@ export default class AsyncStorageManager {
         } catch (error) {
             console.log(error);
             return null;
-            // Error retrieving data
         }
     };
 

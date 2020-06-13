@@ -22,14 +22,16 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
     paddingLeft: 25,
-    marginTop: 100
+    marginTop: 50
   },
   speciesText: {
-    fontSize: 65,
+    marginBottom: 50,
+    fontSize: 50,
     color: '#fff'
   },
   locationText: {
-    fontSize: 60,
+    marginBottom: 20,
+    fontSize: 30,
     color: '#000000'
   }
 });

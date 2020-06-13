@@ -57,7 +57,7 @@ export default class Splash extends React.Component {
 
     componentDidMount() {
         this.animateLogo().then(() => {
-            return Storage.getInstance().getUserToken()
+            return AsyncStorageManager.getInstance().getUserToken()
         }).then(userToken => {
             if (!userToken) {
                 throw new Error("Empty token");

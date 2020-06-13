@@ -37,7 +37,7 @@ export default class Tag extends React.Component {
           </View>
           ) : (
           <View style={styles.bodyContainer}>
-            <Tree species='Sprucea' location={location}/>
+            <Tree species='Spruce' location={location}/>
           </View>
         )}
       </View>
