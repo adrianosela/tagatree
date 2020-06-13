@@ -79,21 +79,40 @@ func (m *Mongo) GetTree(id string) (*objects.Tree, error) {
 	}
 
 	var tree objects.Tree
-	err = m.trees.FindOne(context.TODO(), querySingle(idobj)).Decode(&tree)
+	err = m.trees.FindOne(context.TODO(), queryEqual(idFieldKey, idobj)).Decode(&tree)
 
 	return &tree, err
 }
 
 // ListTrees gets a list of trees from the db
+// note: opts must be validated before passing it this function
 func (m *Mongo) ListTrees(opts *ListOpts) ([]*objects.Tree, error) {
 
-	matches := bson.M{}
+	query := bson.D{}
 
 	if opts != nil {
-		// TODO: filter using opts
+		if err := opts.validate(); err != nil {
+			return nil, err
+		}
+		matches := []bson.D{}
+		if opts.RadiusMeters > 0 {
+			matches = append(matches, queryNear(opts.Location, opts.RadiusMeters))
+		}
+		if opts.Species != nil && len(opts.Species) > 0 {
+			matches = append(matches, queryIn(speciesFieldKey, opts.Species))
+		}
+		if opts.TaggedBy != nil && len(opts.TaggedBy) > 0 {
+			matches = append(matches, queryIn(taggedByFieldKey, opts.TaggedBy))
+		}
+		if len(matches) == 1 {
+			query = matches[0]
+		}
+		if len(matches) > 1 {
+			query = bson.D{{Key: "$and", Value: matches}}
+		}
 	}
 
-	cur, err := m.trees.Find(context.TODO(), matches)
+	cur, err := m.trees.Find(context.TODO(), query)
 	if err != nil {
 		return nil, err
 	}
@@ -121,7 +140,7 @@ func (m *Mongo) UpdateTree(tree *objects.Tree) error {
 			// TODO: set any fields that may be updated
 		},
 	}
-	_, err := m.trees.UpdateOne(context.TODO(), querySingle(tree.ID), update)
+	_, err := m.trees.UpdateOne(context.TODO(), queryEqual(idFieldKey, tree.ID), update)
 	return err
 }
 
@@ -131,10 +150,33 @@ func (m *Mongo) DeleteTree(id string) error {
 	if err != nil {
 		return errors.New("invalid id")
 	}
-	_, err = m.trees.DeleteOne(context.TODO(), querySingle(idobj))
+	_, err = m.trees.DeleteOne(context.TODO(), queryEqual(idFieldKey, idobj))
 	return err
 }
 
-func querySingle(id primitive.ObjectID) bson.D {
-	return bson.D{{Key: genericPrimaryKey, Value: id}}
+func queryEqual(field string, value interface{}) bson.D {
+	return bson.D{
+		{
+			Key:   idFieldKey,
+			Value: value,
+		},
+	}
+}
+
+func queryIn(field string, set []string) bson.D {
+	return bson.D{
+		{
+			Key:   field,
+			Value: bson.M{"$in": set},
+		},
+	}
+}
+
+func queryNear(loc *objects.Location, radius int) bson.D {
+	return bson.D{
+		{
+			Key:   locationFieldKey,
+			Value: bson.M{"$near": bson.M{"$geometry": loc, "$maxDistance": radius}},
+		},
+	}
 }

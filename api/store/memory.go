@@ -6,6 +6,7 @@ import (
 
 	"github.com/adrianosela/tagatree/api/objects"
 	"go.mongodb.org/mongo-driver/bson/primitive"
+	geo "gopkg.in/Billups/golang-geo.v2"
 )
 
 // Memory implements the Store
@@ -49,14 +50,57 @@ func (m *Memory) GetTree(id string) (*objects.Tree, error) {
 func (m *Memory) ListTrees(opts *ListOpts) ([]*objects.Tree, error) {
 	trees := []*objects.Tree{}
 
+	// if no options specified, return all
+	if opts == nil {
+		for _, tree := range m.trees {
+			trees = append(trees, tree)
+		}
+		return trees, nil
+	}
+
+	if err := opts.validate(); err != nil {
+		return nil, err
+	}
+
+	var location *geo.Point
+	if opts.RadiusMeters > 0 && opts.Location != nil {
+		if err := opts.Location.Validate(); err != nil {
+			return nil, err
+		}
+		location = geo.NewPoint(opts.Location.Coordinates[1], opts.Location.Coordinates[0])
+	}
+
 	for _, tree := range m.trees {
-		if opts != nil {
-			// TODO: filter using opts
+		if location != nil {
+			p2 := geo.NewPoint(tree.Location.Coordinates[1], tree.Location.Coordinates[0])
+			if location.GreatCircleDistance(p2) > float64(opts.RadiusMeters)/1000 {
+				continue
+			}
+		}
+		if opts.Species != nil && len(opts.Species) > 0 {
+			if !containsString(opts.Species, tree.Species) {
+				continue
+			}
+		}
+		if opts.TaggedBy != nil && len(opts.TaggedBy) > 0 {
+			if !containsString(opts.TaggedBy, tree.Species) {
+				continue
+			}
 		}
 		trees = append(trees, tree)
 	}
 
 	return trees, nil
+}
+
+// containsString returns true if the container contains the item
+func containsString(container []string, item string) (contained bool) {
+	for _, i := range container {
+		if i == item {
+			return true
+		}
+	}
+	return false
 }
 
 // UpdateTree updates a tree in the store

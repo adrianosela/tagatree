@@ -14,10 +14,17 @@ import (
 
 // listTreesHandler lists trees as per a set of filters
 func (c *Controller) listTreesHandler(w http.ResponseWriter, r *http.Request) {
-	// FIXME: perhaps make this a POST instead, and
-	// take filtering options from the request body
+	var opts *store.ListOpts
 
-	opts := &store.ListOpts{ /* FIXME */ }
+	// get options from request body if its a POST
+	if r.Method == http.MethodPost {
+		if err := unmarshalRequestBody(r, &opts); err != nil {
+			log.Println(err)
+			w.WriteHeader(http.StatusInternalServerError)
+			w.Write([]byte("could not unmarshal request body"))
+			return
+		}
+	}
 
 	list, err := c.trees.ListTrees(opts)
 	if err != nil {
