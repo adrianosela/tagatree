@@ -19,7 +19,7 @@ var (
 	// index on the 2dsphere type field "location"
 	treeIndexModel = mongo.IndexModel{
 		Options: options.Index().SetBackground(true),
-		Keys:    bsonx.MDoc{"location": bsonx.String("2dsphere")},
+		Keys:    bsonx.MDoc{locationFieldKey: bsonx.String("2dsphere")},
 	}
 )
 

@@ -63,10 +63,7 @@ func (m *Memory) ListTrees(opts *ListOpts) ([]*objects.Tree, error) {
 	}
 
 	var location *geo.Point
-	if opts.RadiusMeters > 0 && opts.Location != nil {
-		if err := opts.Location.Validate(); err != nil {
-			return nil, err
-		}
+	if opts.RadiusMeters > 0 {
 		location = geo.NewPoint(opts.Location.Coordinates[1], opts.Location.Coordinates[0])
 	}
 
