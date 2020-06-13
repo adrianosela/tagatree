@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import Tree from '../objects/Tree'
+import Tree from '../../objects/Tree'
 
 export default class Tag extends React.Component {
   state = {

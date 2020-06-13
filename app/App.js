@@ -3,9 +3,9 @@ import { View, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import Splash from './components/pages/Splash';
-import Login from './components/pages/Login';
-import Tag from './components/pages/Tag';
+import Splash from './components/pages/splash/Splash';
+import Login from './components/pages/login/Login';
+import Tag from './components/pages/tag/Tag';
 
 const Stack = createStackNavigator();
 
