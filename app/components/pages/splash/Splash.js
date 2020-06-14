@@ -1,8 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View, StatusBar, Image, Animated, ActivityIndicator } from 'react-native';
 import jwtDecode from 'jwt-decode';
-import AsyncStorageManager from '../../../utils/AsyncStorageManager';
-import Logo from '../common/Logo';
+import AsyncStorageManager from '../../storage/AsyncStorageManager';
+import Logo from '../../utils/Logo';
 
 const styles = StyleSheet.create({
     topContainer: {

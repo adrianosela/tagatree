@@ -1,6 +1,6 @@
 import React from 'react';
 import base64 from 'base-64';
-import config from '../Config';
+import config from '../../Config';
 
 export const login = (email, password) => {
     return new Promise((resolve, reject) => {

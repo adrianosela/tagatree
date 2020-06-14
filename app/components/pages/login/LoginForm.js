@@ -6,30 +6,56 @@ import {
   TextInput,
   TouchableOpacity
 } from 'react-native';
+import { login } from '../../api/Auth';
+import AsyncStorageManager from '../../storage/AsyncStorageManager';
 
 export default class LoginForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.onLoginButtonPressed = this.onLoginButtonPressed.bind(this);
+    this.state = {email: '', password: ''};
+  }
+
+  onLoginButtonPressed() {
+    if (!this.state.email || !this.state.password) {
+      // fixme: use pretty alerts/errors
+      console.log("no email or password!");
+      return;
+    }
+    login(this.state.email, this.state.password)
+    .then((response) => {
+      AsyncStorageManager.getInstance().saveUserToken(response.token);
+      this.props.onSuccess();
+     })
+     .catch((ex) => {
+       console.log(ex);
+     });
+  }
+
   render() {
     return (
       <View style={styles.container}>
         <TextInput
 	  placeholder='username or email'
+	  onChangeText={(val) => this.setState({email: val})}
 	  placeholderTextColor='#000000'
 	  returnKeyType='next'
-	  onSubmitEditing={() => this.passwordInput.focus()}
 	  keyboardType='email-address'
 	  autoCapitalize='none'
 	  autoCorrect={false}
+	  onSubmitEditing={() => this.passwordInput.focus()}
           style={styles.input}
         />
         <TextInput
 	  placeholder='password'
+	  onChangeText={(val) => this.setState({password: val})}
 	  placeholderTextColor='#000000'
 	  returnKeyType='go'
 	  secureTextEntry
 	  ref={(input) => this.passwordInput = input }
           style={styles.input}
         />
-	<TouchableOpacity style={styles.buttonContainer}>
+	<TouchableOpacity style={styles.buttonContainer} onPress={this.onLoginButtonPressed}>
 	  <Text style={styles.buttonText}>Login</Text>
 	</TouchableOpacity>
       </View>

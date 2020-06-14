@@ -7,7 +7,7 @@ export default class Logo extends React.Component {
       <View style={styles.logoContainer}>
 	<Image
 	  style={styles.logo}
-	  source={require('../../../assets/icon.png')}
+	  source={require('../../assets/icon.png')}
 	/>
 	<Text style={styles.title}>Tag-A-Tree</Text>
       </View>
