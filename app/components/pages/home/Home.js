@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import MapView from 'react-native-maps';
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -38,8 +39,17 @@ export default class Home extends React.Component {
           ) : (
           <View style={styles.bodyContainer}>
             <Text style={styles.titleText}>Your Location:</Text>
-            <Text style={styles.coordsText}>Latitude: {location.coordinates[1]}</Text>
-            <Text style={styles.coordsText}>Longitude: {location.coordinates[0]}</Text>
+            <MapView
+              style={styles.map}
+              region={{
+                latitude: location.coordinates[1],
+                longitude: location.coordinates[0],
+                latitudeDelta: 0.01,
+                longitudeDelta: 0.01
+              }}
+	    >
+              <MapView.Marker coordinate={{latitude: location.coordinates[1], longitude: location.coordinates[0]}} />
+	    </MapView>
           </View>
         )}
       </View>
@@ -60,7 +70,7 @@ const styles = StyleSheet.create({
   },
   titleText: {
     fontSize: 40,
-    marginBottom: 50
+    marginTop: 50
   },
   coordsText: {
     marginBottom: 20,
@@ -72,5 +82,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#90FF28'
+  },
+  map: {
+    ...StyleSheet.absoluteFill
   }
 });
