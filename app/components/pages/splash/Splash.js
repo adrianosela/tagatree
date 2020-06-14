@@ -1,10 +1,17 @@
 import React from 'react';
 import { StyleSheet, View, StatusBar, Animated, ActivityIndicator } from 'react-native';
 import jwtDecode from 'jwt-decode';
+import PropTypes from 'prop-types';
 import AsyncStorageManager from '../../storage/AsyncStorageManager';
 import Logo from '../../utils/Logo';
 
 export default class Splash extends React.Component {
+  propTypes = {
+    navigation: PropTypes.shape({
+      navigate: PropTypes.func.isRequired,
+    }).isRequired,
+  }
+
   constructor(props) {
     super(props);
 

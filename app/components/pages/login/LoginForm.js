@@ -6,10 +6,15 @@ import {
   TextInput,
   TouchableOpacity
 } from 'react-native';
+import PropTypes from 'prop-types';
 import * as auth from '../../api/Auth';
 import AsyncStorageManager from '../../storage/AsyncStorageManager';
 
 export default class LoginForm extends React.Component {
+  propTypes = {
+    onSuccess: PropTypes.func.isRequired,
+  }
+
   constructor(props) {
     super(props);
     this.onLoginButtonPressed = this.onLoginButtonPressed.bind(this);

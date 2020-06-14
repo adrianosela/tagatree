@@ -1,9 +1,16 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { StyleSheet, View, KeyboardAvoidingView } from 'react-native';
 import Logo from '../../utils/Logo';
 import LoginForm from './LoginForm';
 
 export default class Login extends React.Component {
+  propTypes = {
+    navigation: PropTypes.shape({
+      navigate: PropTypes.func.isRequired,
+    }).isRequired,
+  }
+
   constructor(props) {
     super(props);
   }
