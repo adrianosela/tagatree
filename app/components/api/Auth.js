@@ -4,7 +4,7 @@ import config from '../../Config';
 
 export const login = (email, password) => {
     return new Promise((resolve, reject) => {
-        fetch(config.API_URL + '/login', {
+        fetch(`{config.API_URL}/login`, {
             method: 'GET',
             headers: {
                 'Authorization': 'Basic ' + base64.encode(email + ":" + password)
@@ -14,7 +14,10 @@ export const login = (email, password) => {
             if (response.status === 200) {
                 resolve(response.json());
             }
-            reject({ error: 'Request failed' });
+	    if (response.status === 401) {
+		reject( { error: 'unauthorized' });
+	    }
+	    reject( { error: 'unhandled error' });
         })
         .catch((error) => {
             console.log(error);
