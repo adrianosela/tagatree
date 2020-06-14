@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { StyleSheet, View, KeyboardAvoidingView } from 'react-native';
-import Logo from '../../utils/Logo';
+import Logo from '../../components/Logo';
 import LoginForm from './LoginForm';
 
 export default class Login extends React.Component {
-  propTypes = {
+  static propTypes = {
     navigation: PropTypes.shape({
       navigate: PropTypes.func.isRequired,
     }).isRequired,

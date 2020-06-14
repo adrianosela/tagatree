@@ -1,4 +1,4 @@
-import config from '../../Config';
+import config from '../Config';
 import AsyncStorageManager from '../storage/AsyncStorageManager';
 
 export const getTree = (id) => {

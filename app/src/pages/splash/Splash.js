@@ -3,10 +3,10 @@ import { StyleSheet, View, StatusBar, Animated, ActivityIndicator } from 'react-
 import jwtDecode from 'jwt-decode';
 import PropTypes from 'prop-types';
 import AsyncStorageManager from '../../storage/AsyncStorageManager';
-import Logo from '../../utils/Logo';
+import Logo from '../../components/Logo';
 
 export default class Splash extends React.Component {
-  propTypes = {
+  static propTypes = {
     navigation: PropTypes.shape({
       navigate: PropTypes.func.isRequired,
     }).isRequired,

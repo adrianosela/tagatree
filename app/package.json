@@ -6,7 +6,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "lint": "eslint *.js App.js Config.js components --fix"
+    "lint": "eslint *.js App.js src --fix"
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.11.0",

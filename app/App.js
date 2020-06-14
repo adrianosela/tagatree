@@ -2,10 +2,10 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import Splash from './components/pages/splash/Splash';
-import Login from './components/pages/login/Login';
-import Home from './components/pages/home/Home';
-import Tag from './components/pages/tag/Tag';
+import Splash from './src/pages/splash/Splash';
+import Login from './src/pages/login/Login';
+import Home from './src/pages/home/Home';
+import Tag from './src/pages/tag/Tag';
 
 const Stack = createStackNavigator();
 

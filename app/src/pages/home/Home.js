@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import Map from '../../utils/Map';
+import Map from '../../components/Map';
 
 export default class Home extends React.Component {
   constructor(props) {

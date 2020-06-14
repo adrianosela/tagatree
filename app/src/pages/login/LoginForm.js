@@ -11,7 +11,7 @@ import * as auth from '../../api/Auth';
 import AsyncStorageManager from '../../storage/AsyncStorageManager';
 
 export default class LoginForm extends React.Component {
-  propTypes = {
+  static propTypes = {
     onSuccess: PropTypes.func.isRequired,
   }
 
