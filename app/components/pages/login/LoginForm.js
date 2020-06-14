@@ -6,7 +6,7 @@ import {
   TextInput,
   TouchableOpacity
 } from 'react-native';
-import { login } from '../../api/Auth';
+import * as auth from '../../api/Auth';
 import AsyncStorageManager from '../../storage/AsyncStorageManager';
 
 export default class LoginForm extends React.Component {
@@ -22,7 +22,7 @@ export default class LoginForm extends React.Component {
       console.log("no email or password!");
       return;
     }
-    login(this.state.email, this.state.password)
+    auth.login(this.state.email, this.state.password)
     .then((response) => {
       AsyncStorageManager.getInstance().saveUserToken(response.token);
       this.props.onSuccess();
