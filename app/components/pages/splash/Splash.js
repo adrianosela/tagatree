@@ -70,7 +70,7 @@ export default class Splash extends React.Component {
 
             if (exp > new Date()) {
                 // Valid token, skip login
-                this.props.navigation.navigate('MainApp');
+                this.props.navigation.navigate('Home');
             } else {
                 // Not valid
                 this.props.navigation.navigate('Login');
