@@ -1,5 +1,11 @@
 module.exports = {
   extends: ['eslint:recommended', 'plugin:react/recommended'],
+  settings: {
+    react: {
+      pragma: "React",
+      version: "16.9.0"
+    }
+  },
   env: {
     'react-native/react-native': true,
     jest: true,
