@@ -14,15 +14,15 @@ export default class Home extends React.Component {
   componentDidMount() {
     navigator.geolocation.getCurrentPosition(
       (position) => {
-	this.setState({
-	  loading: false,
-	  location: {
-	    coordinates: [position.coords.longitude, position.coords.latitude]
-	  }
-	});
+        this.setState({
+          loading: false,
+          location: {
+            coordinates: [position.coords.longitude, position.coords.latitude]
+          }
+        });
       },
       (error) => {
-	console.log(error);
+        console.log(error);
       }
     );
   }
@@ -36,7 +36,7 @@ export default class Home extends React.Component {
           <View style={styles.loadingContainer}>
             <Text style={styles.titleText}>Locating You</Text>
           </View>
-          ) : (
+        ) : (
           <View style={styles.bodyContainer}>
             <Text style={styles.titleText}>Your Location:</Text>
             <MapView
@@ -47,9 +47,9 @@ export default class Home extends React.Component {
                 latitudeDelta: 0.01,
                 longitudeDelta: 0.01
               }}
-	    >
+            >
               <MapView.Marker coordinate={{latitude: location.coordinates[1], longitude: location.coordinates[0]}} />
-	    </MapView>
+            </MapView>
           </View>
         )}
       </View>
@@ -71,11 +71,6 @@ const styles = StyleSheet.create({
   titleText: {
     fontSize: 30,
     marginTop: 50
-  },
-  coordsText: {
-    marginBottom: 20,
-    fontSize: 30,
-    color: '#000000'
   },
   bodyContainer: {
     flex: 1,

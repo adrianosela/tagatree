@@ -19,45 +19,45 @@ export default class LoginForm extends React.Component {
   onLoginButtonPressed() {
     if (!this.state.email || !this.state.password) {
       // fixme: use pretty alerts/errors
-      console.log("no email or password!");
+      console.log('no email or password!');
       return;
     }
     auth.login(this.state.email, this.state.password)
-    .then((response) => {
-      AsyncStorageManager.getInstance().saveUserToken(response.token);
-      this.props.onSuccess();
-     })
-     .catch((ex) => {
-       console.log(ex);
-     });
+      .then((response) => {
+        AsyncStorageManager.getInstance().saveUserToken(response.token);
+        this.props.onSuccess();
+      })
+      .catch((ex) => {
+        console.log(ex);
+      });
   }
 
   render() {
     return (
       <View style={styles.container}>
         <TextInput
-	  placeholder='username or email'
-	  onChangeText={(val) => this.setState({email: val})}
-	  placeholderTextColor='#000000'
-	  returnKeyType='next'
-	  keyboardType='email-address'
-	  autoCapitalize='none'
-	  autoCorrect={false}
-	  onSubmitEditing={() => this.passwordInput.focus()}
+          placeholder='username or email'
+          onChangeText={(val) => this.setState({email: val})}
+          placeholderTextColor='#000000'
+          returnKeyType='next'
+          keyboardType='email-address'
+          autoCapitalize='none'
+          autoCorrect={false}
+          onSubmitEditing={() => this.passwordInput.focus()}
           style={styles.input}
         />
         <TextInput
-	  placeholder='password'
-	  onChangeText={(val) => this.setState({password: val})}
-	  placeholderTextColor='#000000'
-	  returnKeyType='go'
-	  secureTextEntry
-	  ref={(input) => this.passwordInput = input }
+          placeholder='password'
+          onChangeText={(val) => this.setState({password: val})}
+          placeholderTextColor='#000000'
+          returnKeyType='go'
+          secureTextEntry
+          ref={(input) => this.passwordInput = input }
           style={styles.input}
         />
-	<TouchableOpacity style={styles.buttonContainer} onPress={this.onLoginButtonPressed}>
-	  <Text style={styles.buttonText}>Login</Text>
-	</TouchableOpacity>
+        <TouchableOpacity style={styles.buttonContainer} onPress={this.onLoginButtonPressed}>
+          <Text style={styles.buttonText}>Login</Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
   buttonText: {
     textAlign: 'center',
     fontSize: 20,
-    fontWeight: "700",
+    fontWeight: '700',
     color: '#fffff0'
   }
 });

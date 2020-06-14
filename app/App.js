@@ -1,5 +1,4 @@
 import React from 'react';
-import { View, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -16,7 +15,7 @@ function App() {
       <Stack.Navigator initialRouteName="Splash">
         <Stack.Screen options={{headerShown: false}} name='Splash' component={Splash} />
         <Stack.Screen options={{headerShown: false}} name='Login' component={Login} />
-	<Stack.Screen options={{headerShown: false}} name='Home' component={Home} />
+        <Stack.Screen options={{headerShown: false}} name='Home' component={Home} />
         <Stack.Screen name='Tag' component={Tag} />
       </Stack.Navigator>
     </NavigationContainer>

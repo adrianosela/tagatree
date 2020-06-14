@@ -5,11 +5,11 @@ export default class Logo extends React.Component {
   render() {
     return (
       <View style={styles.logoContainer}>
-	<Image
-	  style={styles.logo}
-	  source={require('../../assets/icon.png')}
-	/>
-	<Text style={styles.title}>Tag-A-Tree</Text>
+        <Image
+          style={styles.logo}
+          source={require('../../assets/icon.png')}
+        />
+        <Text style={styles.title}>Tag-A-Tree</Text>
       </View>
     );
   }

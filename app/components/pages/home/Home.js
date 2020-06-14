@@ -7,7 +7,7 @@ export default class Home extends React.Component {
     super(props);
   }
 
-  render(props) {
+  render() {
     return (
       <View behavior='padding' style={styles.mapContainer}>
         <Map />

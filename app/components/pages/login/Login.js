@@ -1,19 +1,19 @@
 import React from 'react';
-import { StyleSheet, View, KeyboardAvoidingView, Image, Text } from 'react-native';
+import { StyleSheet, View, KeyboardAvoidingView } from 'react-native';
 import Logo from '../../utils/Logo';
 import LoginForm from './LoginForm';
 
 export default class Login extends React.Component {
- constructor(props) {
-  super(props);
- }
+  constructor(props) {
+    super(props);
+  }
 
-  render(props) {
+  render() {
     return (
       <KeyboardAvoidingView behavior='padding' style={styles.loginContainer}>
-	<Logo />
+        <Logo />
         <View style={styles.formContainer}>
-	    <LoginForm onSuccess={() => this.props.navigation.navigate('Home')}/>
+          <LoginForm onSuccess={() => this.props.navigation.navigate('Home')}/>
         </View>
       </KeyboardAvoidingView>
     );
