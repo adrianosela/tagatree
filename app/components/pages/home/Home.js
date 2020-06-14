@@ -1,6 +1,5 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import Tree from '../../objects/Tree'
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -34,11 +33,13 @@ export default class Home extends React.Component {
       <View style={styles.appContainer}>
         { loading ? (
           <View style={styles.loadingContainer}>
-            <Text stlye={styles.loadingText}>Locating You</Text>
+            <Text style={styles.titleText}>Locating You</Text>
           </View>
           ) : (
           <View style={styles.bodyContainer}>
-            <Tree species='Spruce' location={location}/>
+            <Text style={styles.titleText}>Your Location:</Text>
+            <Text style={styles.coordsText}>Latitude: {location.coordinates[1]}</Text>
+            <Text style={styles.coordsText}>Longitude: {location.coordinates[0]}</Text>
           </View>
         )}
       </View>
@@ -53,18 +54,23 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF'
   },
   loadingContainer: {
-    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#00FF00'
   },
-  loadingText: {
-    fontSize: 200
+  titleText: {
+    fontSize: 40,
+    marginBottom: 50
+  },
+  coordsText: {
+    marginBottom: 20,
+    fontSize: 30,
+    color: '#000000'
   },
   bodyContainer: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#00FF8F'
+    backgroundColor: '#90FF28'
   }
 });

@@ -1,48 +1,19 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import Tree from '../../objects/Tree'
 
 export default class Tag extends React.Component {
-  state = {
-    isLoading: true,
-    location: {
-      coordinates: [null, null]
-    }
-  };
-
-  componentDidMount() {
-    navigator.geolocation.getCurrentPosition(
-      position => {
-	this.setState({
-	  isLoading: false,
-	  location: {
-	    coordinates: [position.coords.longitude, position.coords.latitude]
-	  }
-	});
-      },
-      error => {
-	console.log(error); // FIXME
-      }
-    );
+  constructor(props) {
+    super(props);
   }
 
   render() {
-    const { isLoading, location } = this.state
-
     return (
       <View style={styles.appContainer}>
-        {isLoading ? (
-          <View style={styles.loadingContainer}>
-            <Text stlye={styles.loadingText}>Locating You</Text>
-          </View>
-          ) : (
-          <View style={styles.bodyContainer}>
-            <Tree species='Spruce' location={location}/>
-          </View>
-        )}
+        <Text style={styles.todoText}>TODO</Text>
       </View>
     );
   }
+
 }
 
 const styles = StyleSheet.create({
@@ -50,19 +21,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#FFF'
   },
-  loadingContainer: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#00FF00'
-  },
-  loadingText: {
+  todoText: {
     fontSize: 200
-  },
-  bodyContainer: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#00FF8F'
   }
 });
