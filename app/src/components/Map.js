@@ -34,7 +34,7 @@ export default class Home extends React.Component {
       <View style={styles.appContainer}>
         { loading ? (
           <View style={styles.loadingContainer}>
-            <Text style={styles.titleText}>Locating You</Text>
+            <Text style={styles.titleText}>Locating You...</Text>
           </View>
         ) : (
           <View style={styles.bodyContainer}>
