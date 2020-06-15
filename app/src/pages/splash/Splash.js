@@ -56,7 +56,7 @@ export default class Splash extends React.Component {
           {
             toValue: 260,
             duration: 700,
-	    useNativeDriver: true
+            useNativeDriver: true
           }
         ),
         Animated.timing(
@@ -64,7 +64,7 @@ export default class Splash extends React.Component {
           {
             toValue: 1.0,
             duration: 700,
-	    useNativeDriver: true
+            useNativeDriver: true
           }
         ),
         Animated.timing(
@@ -72,7 +72,7 @@ export default class Splash extends React.Component {
           {
             toValue: 1.0,
             duration: 700,
-	    useNativeDriver: true
+            useNativeDriver: true
           }
         ),
 
@@ -90,7 +90,7 @@ export default class Splash extends React.Component {
     return (
       <View style={[styles.topContainer, styles.container]}>
         <StatusBar barStyle="light-content" />
-        <Animated.View style={[styles.logoWrapper, {width: this.state.logoWidth}]}>
+        <Animated.View style={styles.logoWrapper}>
           <Logo />
         </Animated.View>
         <ActivityIndicator size="small"
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
   },
   logoWrapper: {
     flexDirection: 'row',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
     alignItems: 'center',
     height: 80,
     width: 80,

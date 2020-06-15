@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import MapView from 'react-native-maps';
+import Geolocation from '@react-native-community/geolocation';
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -12,7 +13,7 @@ export default class Home extends React.Component {
   }
 
   componentDidMount() {
-    navigator.geolocation.getCurrentPosition(
+    Geolocation.getCurrentPosition(
       (position) => {
         this.setState({
           loading: false,
