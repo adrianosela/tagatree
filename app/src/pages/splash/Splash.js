@@ -56,6 +56,7 @@ export default class Splash extends React.Component {
           {
             toValue: 260,
             duration: 700,
+	    useNativeDriver: true
           }
         ),
         Animated.timing(
@@ -63,6 +64,7 @@ export default class Splash extends React.Component {
           {
             toValue: 1.0,
             duration: 700,
+	    useNativeDriver: true
           }
         ),
         Animated.timing(
@@ -70,6 +72,7 @@ export default class Splash extends React.Component {
           {
             toValue: 1.0,
             duration: 700,
+	    useNativeDriver: true
           }
         ),
 
