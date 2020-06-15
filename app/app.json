@@ -22,7 +22,12 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
-    }
+      "supportsTablet": true,
+      "bundleIdentifier": "com.adrianosela.tagatree.app"
+    },
+    "android": {
+      "package": "com.adrianosela.tagatree.app"
+    },
+    "entryPoint": "node_modules/expo/AppEntry.js"
   }
 }
