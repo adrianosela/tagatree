@@ -1,5 +1,5 @@
-FROM alpine:latest AS api
-RUN apk add --update bash curl && rm -rf /var/cache/apk/*
+FROM ubuntu:latest
+RUN apt-get install -y bash && rm -rf /var/cache/apk/*
 COPY ./tagatree /bin/tagatree
 EXPOSE 443
 EXPOSE 80
