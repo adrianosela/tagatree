@@ -6,5 +6,5 @@
 
 Tag-a-Tree is a geolocation based tree tagging service
 
-* Back-End: (in /api) written in Go.
-* Front-End: (in /app) written in React Native
+* Back-End: (in /api) written in Go
+* Front-End: (in /app) written in Javascript (React)
