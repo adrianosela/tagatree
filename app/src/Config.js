@@ -1,3 +1,3 @@
 export default {
-  API_URL: 'http://192.168.1.83:8080'
+  API_URL: 'http://192.168.1.65:8080'
 };
