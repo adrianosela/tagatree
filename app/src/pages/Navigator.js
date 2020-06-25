@@ -1,34 +1,28 @@
-import React from 'react'
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
-
-import Home from './home/Home';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import Splash from './splash/Splash';
 import Login from './login/Login';
+import Home from './home/Home';
+import Tag from './tag/Tag';
 
-export default class Navigator extends React.Component{
-    constructor() {
-        super();
-        this.state = {
-            authenticated: false,
-        };
-    }
+const Stack = createStackNavigator();
 
-    render() {
-	const { authenticated } = this.state;
-	
-        return(
-            <BrowserRouter>
-                <Switch>
-		<Route exact path="/" render={() => (
-			authenticated ? (
-				<Redirect to="/home" />
-			) : (
-				<Redirect to="/login" />
-			)
-		)}/>
-                    <Route exact path="/home" component={Home}/>
-                    <Route exact path="/login" component={Login}/>
-                </Switch>
-            </BrowserRouter>
-        );
-    }
+export default class Navigator extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Splash">
+          <Stack.Screen options={{headerShown: false}} name='Splash' component={Splash} />
+          <Stack.Screen options={{headerShown: false}} name='Login' component={Login} />
+          <Stack.Screen options={{headerShown: false}} name='Home' component={Home} />
+          <Stack.Screen name='Tag' component={Tag} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    );
+  }
 }

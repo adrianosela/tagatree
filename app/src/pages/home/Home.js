@@ -1,13 +1,19 @@
 import React from 'react';
-import './Home.scss';
+import { StyleSheet, View, Text } from 'react-native';
 
 export default class Home extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
-    console.log("got to home");
     return (
-      <div className='home-container'>
-        <b>hi there!</b>
-      </div>
+      <View behavior='padding' style={styles.mapContainer}>
+        <Text> Hello World! </Text>
+      </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+});

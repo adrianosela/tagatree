@@ -1,8 +1,9 @@
-import config from './Config';
+import config from '../Config';
+import AsyncStorageManager from '../storage/AsyncStorageManager';
 
 export const getTree = (id) => {
   return new Promise((resolve, reject) => {
-    localStorage.getItem('token')
+    AsyncStorageManager.getInstance().getUserToken()
       .then(token => {
         fetch(`${config.API_URL}/tree/${id}`, {
           method: 'GET',
@@ -28,7 +29,7 @@ export const getTree = (id) => {
 
 export const postTree = (species, location) => {
   return new Promise((resolve, reject) => {
-    localStorage.getItem('token')
+    AsyncStorageManager.getInstance().getUserToken()
       .then(token => {
         fetch(`${config.API_URL}/tree`, {
           method: 'POST',
@@ -53,7 +54,7 @@ export const postTree = (species, location) => {
 
 export const listTrees = (opts) => {
   return new Promise((resolve, reject) => {
-    localStorage.getItem('token')
+    AsyncStorageManager.getInstance().getUserToken()
       .then(userToken => {
         fetch(`${config.API_URL}/trees`, {
           method: (opts) ? 'POST' : 'GET',
