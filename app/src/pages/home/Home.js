@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import Map from '../../components/Map';
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -9,11 +10,15 @@ export default class Home extends React.Component {
   render() {
     return (
       <View behavior='padding' style={styles.mapContainer}>
-        <Text> Hello World! </Text>
+        <Map />
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  mapContainer: {
+    flex: 1,
+    backgroundColor: '#81ecec'
+  }
 });
